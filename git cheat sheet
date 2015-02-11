@@ -1,0 +1,8 @@
+git init 初始化git仓库
+git add <file> 添加文件到版本库
+git commit -m "注释"
+git status 显示工作区状态
+git diff 查看修改的内容
+git reset --hard commit_id (前几位就可以) HEAD指向当前id HEAD^:前一个id
+git log 查看版本库提交历史
+git reflog 查看命令历史
