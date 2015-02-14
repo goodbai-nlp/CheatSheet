@@ -7,7 +7,7 @@ git reset --hard commit_id (前几位就可以) HEAD指向当前id HEAD^:前一�
 git log 查看版本库提交历史 --pretty=oneline 参数只显示id和注释
 git reflog 查看命令历史
 工作区->git add ->版本库->
-git checkout -- <文件>直接丢弃工作区的修改，让此文件回到最近一次git commit或git add时的状态，或者说用版本库的版本替代工作区的版本
+git checkouchakanfent -- <文件>直接丢弃工作区的修改，让此文件回到最近一次git commit或git add时的状态，或者说用版本库的版本替代工作区的版本
 git reset HEAD <file> 去掉暂存区的更改
 git rm <file> 从git库中删除该文件
 git remote add origin git@server-name:path/repo-name.git 要关联一个远程库
@@ -16,3 +16,10 @@ git push origin master  推送最新修改
 git clone 协议+地址
 git协议:git clone git@github.com:username/gitskills.git   快 ssh支持
 http协议:git clone https://github.com/michaelliao/gitskills.git
+git branch 查看分支
+git branch <name> 创建分支
+git checkout <name> 切换到分支
+git checkout -b <name> 创建并切换到分支
+git merge <name> 合并某分支倒当前分支
+git branch -d <name> 删除分支
+
