@@ -22,4 +22,6 @@ git checkout <name> 切换到分支
 git checkout -b <name> 创建并切换到分支
 git merge <name> 合并某分支倒当前分支
 git branch -d <name> 删除分支
+git merge --no-ff -m "注释" dev 禁用fast forward 模式合并，用普通模式
+
 
