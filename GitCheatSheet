@@ -23,5 +23,9 @@ git checkout -b <name> 创建并切换到分支
 git merge <name> 合并某分支倒当前分支
 git branch -d <name> 删除分支
 git merge --no-ff -m "注释" dev 禁用fast forward 模式合并，用普通模式
-
+git stash 当master出现bug时，可以用git stash 储存现场，修复bug后
+git stash pop 返回现场（dev分支下）。
+git branch -D <name> 强行删除一个未合并的分支。
+git remote -v 查看版本库信息
+git push origin branch-name 从本地推送分支
 
