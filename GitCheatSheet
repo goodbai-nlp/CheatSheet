@@ -28,4 +28,12 @@ git stash pop 返回现场（dev分支下）。
 git branch -D <name> 强行删除一个未合并的分支。
 git remote -v 查看版本库信息
 git push origin branch-name 从本地推送分支
+git tag <name> 新建一个标签，默认为head，也可以指定一个id
+git tag -a <tagname> -m "标签信息" 指定标签信息
+git tag 查看所有标签
+git show <tagname> 查看标签信息
+git push origin <tagname> 推送一个本地标签
+git push origin --tags 推送所有未推送的本地标签
+git tag -d <tagname>  删除一个本地标签
+git push origin :refs/tags/<tagname> 删除一个远程标签
 
