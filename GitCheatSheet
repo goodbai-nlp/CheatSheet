@@ -15,6 +15,7 @@ git push -u origin master 第一次推送master分支的所有内容
 git push origin master  推送最新修改
 git clone 协议+地址
 git协议:git clone git@github.com:username/gitskills.git   快 ssh支持
+git checkout -b local-branchname origin/remote_branchname  clone remote branch to local branch  
 http协议:git clone https://github.com/michaelliao/gitskills.git
 git branch 查看分支
 git branch <name> 创建分支
