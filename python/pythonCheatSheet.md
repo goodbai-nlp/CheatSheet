@@ -103,7 +103,7 @@ squares = map(lambda x:x*x,filter(lambda t:t<4,numbers))
 numbers = [1,2,3,4,5]
 numbers_under_4 = [x*x for x in numbers if x<4]
 ```
-#####生成表达式
+#####Generator expressions
 列表生成式要求数据必须一次加载到内存当中，而对于生成表达式，可以不必如此，它每次生成一个generator object，每次加载一个对象
 生成表达式和列表生成式的语法基本相同，区别是生成表达式用的是'()'而不是'[]'
 ```
@@ -125,3 +125,75 @@ for x in (0,1,2,3):
 print [(x, y, x * y) for x in (0,1,2,3) for y in (0,1,2,3) if x < y]
 ```
 #### 2.reduce函数
+```
+numbers = [1,2,3,4,5]
+result = 1
+for number in numbers:
+    result *= number
+# result is now 120
+```
+reduce函数
+```
+numbers = [1,2,3,4,5]
+result = reduce(lambda a,b: a*b, numbers)
+# result is now 120
+```
+#### 2.Iterating over a List: range, xrange and enumerate
+xrange和range类似，但xrange比range效率高，因为xrange的列表不会一次全部加载到内存中；enumerate生成索引+内容对的序列
+```
+strings = ['a', 'b', 'c', 'd', 'e']
+for index in xrange(len(strings)):
+    print index,
+# prints '0 1 2 3 4'
+```
+```
+strings = ['a', 'b', 'c', 'd', 'e']
+for index, string in enumerate(strings):
+    print index, string,
+# prints '0 a 1 b 2 c 3 d 4 e'
+```
+#### 3.all和any
+1.判断存在
+以前：
+```
+numbers = [1,10,100,1000,10000]
+if [number for number in numbers if number < 10]:
+	print 'At least one element is over 10'
+```
+2.5以后：
+```
+numbers = [1,10,100,1000,10000]
+if any(number <10 for number in numbers):
+	print 'balabalabala'
+```
+2.判断任意
+2.5以前：
+```
+numbers = [1,2,3,4,5,6,7,8,9]
+if len(numbers) == len([number for number in numbers if number < 10]):
+    print 'Success!'
+# Output: 'Success!'
+```
+2.5以后：
+```
+numbers = [1,2,3,4,5,6,7,8,9]
+if all(number < 10 for number in numbers):
+    print 'Success!'
+```
+#### 4. 合并多个列表
+```
+letters = ['a', 'b', 'c']
+numbers = [1, 2, 3]
+squares = [1, 4, 9]
+zipped_list = zip(letters, numbers, squares)
+# zipped_list contains [('a', 1, 1), ('b', 2, 4), ('c', 3, 9)]
+```
+#### 5.其他常用函数
+`max() , min() , sum()`
+#### 列表判重
+```
+numbers = [1,2,3,3,4,1]
+if len(numbers) == len(set(numbers)):
+    print 'List is unique!'
+# In this case, doesn't print anything
+```
