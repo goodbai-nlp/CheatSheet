@@ -197,3 +197,80 @@ if len(numbers) == len(set(numbers)):
     print 'List is unique!'
 # In this case, doesn't print anything
 ```
+## 字典
+####简单字典构建
+```
+dict(a=1, b=2, c=3)
+# returns {'a': 1, 'b': 2, 'c': 3}
+```
+####字典到列表
+dict.items()
+```
+dictionary = {'a': 1, 'b': 2, 'c': 3}
+dict_as_list = dictionary.items()
+#dict_as_list now contains [('a', 1), ('b', 2), ('c', 3)]
+```
+####列表到字典
+```
+dict_as_list = [['a', 1], ['b', 2], ['c', 3]]
+dict_as_list2 = [('a', 1), ('b', 2), ('c', 3)]
+dictionary = dict(dict_as_list)
+dictionary2 = dict(dict_as_list2)
+# dictionary now contains {'a': 1, 'b': 2, 'c': 3}
+```
+混合使用
+```
+dict_as_list = [['a', 1], ['b', 2], ['c', 3]]
+dictionary = dict(dict_as_list, d=4, e=5)
+# dictionary now contains {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5}
+```
+####字典生成
+利用列表生成式和列表转字典函数完成，具体效率待考证
+```
+emails = {'Dick': 'bob@example.com', 'Jane': 'jane@example.com', 'Stou': 'stou@example.net'}
+dict2 = dict( [name,'.com' in email] for name,email in emails.iteritems() )
+# email_at_dotcom now is {'Dick': True, 'Jane': True, 'Stou': False}
+```
+## 条件表达式
+#### 三目运算符
+value1 if condition else value2
+```
+test = True
+result = 'Test is True' if test else 'Test is False'
+# result is now 'Test is True'
+```
+#### 嵌套
+```
+test1 = False
+test2 = True
+result = 'Test1 is True' if test1 else 'Test1 is False, test2 is True' if test2 else 'Test1 and Test2 are both False'
+```
+#### and-or tricks
+and-or 被设计来模仿c语言的三目运算符
+```
+test = True
+result = test and 'Test is True' or 'Test is False'
+# result is now 'Test is True'
+```
+存在的问题：当bool and a or b 式中a的值为假时，它不会向三目运算符那样工作
+安全的用法：
+```
+a = ""
+b = "second"
+res = (1 and [a] or [b])[0]
+# res = ""
+```
+直接封装成函数：
+```
+def choose(bool,a,b):
+    return (bool and [a] or [b])[0]
+print  choose(1,'','second')    #''
+```
+#### True和False作为index
+```
+test = True
+result = ['Test is False','Test is True'][test]
+# result is now 'Test is True'
+```
+True相当于1，False相当于0，可以作为index
+这个作法的问题就是要把两个结果/其他都装进数组，很浪费资源，尤其是包括关键IO计算时，会浪费很多时间
