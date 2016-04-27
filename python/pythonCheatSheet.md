@@ -274,3 +274,102 @@ result = ['Test is False','Test is True'][test]
 ```
 True相当于1，False相当于0，可以作为index
 这个作法的问题就是要把两个结果/其他都装进数组，很浪费资源，尤其是包括关键IO计算时，会浪费很多时间
+## Function
+#### 函数的default值问题
+我们写函数时常常这么写
+```
+def add_item(item, stuff = []):
+    stuff.append(item)
+    print stuff
+
+add_item(1)
+# prints '[1]'
+add_item(2)
+# prints '[1,2]' !!!
+```
+本意是向列表里加一个新元素，如果列表不存在就建一个列表
+而当我们进行第二次调用时，会发现并不是我们想要的只含一个元素的列表，而是两个元素！！！python函数中的default变量是存在内存中的，只能初始化一次。而且当函数第二次调用时和第一次是公用该变量的。一个解决方案是这样的：
+```
+def function(item, stuff = None):
+	if stuff is None:
+    	stuff = []
+    stuff.append(item)
+    print stuff
+
+function(1)
+prints '[1]'
+function(2)
+# prints '[2]', as expected
+```
+总结起来就是function defaults不要用可变的对象
+#### python函数参数数量
+python允许你的函数传入任意多参数，只需在函数定义时的参数前加一个'*'
+```
+def do_something(a, b, c, *args):
+    print a, b, c, args
+do_something(1,2,3,4,5,6,7,8,9)
+# prints '1, 2, 3, (4, 5, 6, 7, 8, 9)'
+```
+可以看出其它的参数被存到一个元组中
+其实还可以这样：
+```
+def do_something_else(a, b, c, *args, **kwargs):
+    print a, b, c, args, kwargs
+
+do_something_else(1,2,3,4,5,6,7,8,9, timeout=1.5)
+# prints '1, 2, 3, (4, 5, 6, 7, 8, 9), {"timeout": 1.5}'
+```
+如上，你可以加入任意多的赋值
+#### 用list或dict的内容作为参数
+```
+arg = [5,2]
+pow(*args)
+# return pow(5,2) ,5^2 = 25
+```
+```
+def do_something(actually_do_something=True, print_a_bunch_of_numbers=False):
+    if actually_do_something:
+        print 'Something has been done'
+        if print_a_bunch_of_numbers:
+            print range(10)
+kwargs = {'actually_do_something': True, 'print_a_bunch_of_numbers': True}
+do_something(**kwargs)
+# prints 'Something has been done', then '[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]'
+```
+#### 'Switch Statements' using Dictionaries of Functions
+来看这样一种情况
+```
+def key_1_pressed():
+    print 'Key 1 Pressed'
+
+def key_2_pressed():
+    print 'Key 2 Pressed'
+
+def key_3_pressed():
+    print 'Key 3 Pressed'
+def unknown_key_pressed():
+    print 'Unknown Key Pressed'
+keycode = 2
+if keycode == 1:
+   key_1_pressed()
+elif keycode == 2:
+   key_2_pressed()
+elif number == 3:
+   key_3_pressed()
+else:
+   unknown_key_pressed()
+# prints 'Key 2 Pressed'
+```
+当然你可以选择switch，但还是不够简单，来看一种更美丽的写法
+```
+keycode = 2
+functions = {1: key_1_pressed, 2: key_2_pressed, 3: key_3_pressed}
+functions.get(keycode, unknown_key_pressed)()
+```
+利用了字典的get(),如果没有对应的key，则运行unknown_key_pressed，是不是还不错？
+
+
+- - -
+
+目前就这么多，下次有机会再总结
+英文原文：[http://www.siafoo.net/article/52](http://www.siafoo.net/article/52)
