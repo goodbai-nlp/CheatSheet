@@ -9,7 +9,9 @@
 @file: iterator.py
 @time: 16-5-23 下午11:16
 """
-"""================================python iterator========================"""
+"""================================python iterator========================
+    两个需要重写的函数，__iter__()返回迭代器类型，next()返回下一个元素值,处理异常停顿
+"""
 ita = iter([1,2,3]) #将可迭代对象转换成迭代器
 print type(ita)
 print next(ita)
@@ -43,18 +45,15 @@ class Fibs(object):
         self.a = 0
         self.b = 1
     def next(self):
-        if self.a <10:
+        if self.b <10:
             self.a,self.b = self.b,self.a+ self.b
             return self.a
         else:
-            return StopIteration
+            raise StopIteration
     def __iter__(self):
         return self
 
+
 c2 = Fibs()
 for i in c2:
-    if i<10:
-        print i
-    else:
-        break
-print("what are you fucking to say?")
+    print i
