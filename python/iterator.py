@@ -24,7 +24,7 @@ class Container(object):
         print "[LOG] I made this iterator!"
         return self
 
-    def __next__(self):
+    def next(self):
         print("[LOG] Calling __next__ method!")
         if self.start<self.end:
             i = self.start
@@ -35,3 +35,23 @@ class Container(object):
 c = Container(0,5)
 for i in c:
     print i
+
+class Fibs(object):
+    def __init__(self):
+        self.a = 0
+        self.b = 1
+    def next(self):
+        if self.a <10:
+            self.a,self.b = self.b,self.a+ self.b
+            return self.a
+        else:
+            return StopIteration
+    def __iter__(self):
+        return self
+
+c2 = Fibs()
+for i in c2:
+    if i<10:
+        print i
+    else:
+        break
