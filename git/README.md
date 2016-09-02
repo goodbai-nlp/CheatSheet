@@ -78,3 +78,8 @@ git tag -d <tagname>  删除一个本地标签
 git push origin :refs/tags/<tagname> 删除一个远程标签
 
 git config --global alias.st status  命令简化，alias.后的是简化后命令，后接命令当前用户的命令简化文件:用户根目录下.gitconfig文件
+
+.gitignore规则不生效的解决办法,.gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。那么解决方法就是先把本地缓存删除（改变成未track状态），然后再提交：
+git rm -r --cached .
+git add .
+git commit -m 'update .gitignore'
